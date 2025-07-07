@@ -413,37 +413,37 @@ with col7:
 #st.header("💾 Export Data")
 
 # Create dataframe
-df = pd.DataFrame({
-    'Wavelength (nm)': wavelengths,
-    'Intensity': intensities
-})
+# df = pd.DataFrame({
+#     'Wavelength (nm)': wavelengths,
+#     'Intensity': intensities
+# })
 
-col8, col9 = st.columns(2)
+# col8, col9 = st.columns(2)
 
-with col8:
-    st.download_button(
-        label="📥 Download Spectrum Data (CSV)",
-        data=df.to_csv(index=False),
-        file_name=f"ppktp_spectrum_T{temperature}C.csv",
-        mime="text/csv"
-    )
+# with col8:
+#     # st.download_button(
+#     #     label="📥 Download Spectrum Data (CSV)",
+#     #     data=df.to_csv(index=False),
+#     #     file_name=f"ppktp_spectrum_T{temperature}C.csv",
+#     #     mime="text/csv"
+#     # )
 
-with col9:
-    if enable_temp_scan:
-        # Create temperature scan data for download
-        temp_step = 5
-        temps_download = np.arange(temp_min, temp_max + temp_step, temp_step)
-        degenerate_wl = 2 * pump_wavelength
+# with col9:
+#     if enable_temp_scan:
+#         # Create temperature scan data for download
+#         temp_step = 5
+#         temps_download = np.arange(temp_min, temp_max + temp_step, temp_step)
+#         degenerate_wl = 2 * pump_wavelength
         
-        temp_scan_data = []
-        for temp in temps_download:
-            intensity = simulator.calculate_intensity([degenerate_wl], pump_wavelength, temp, crystal_length, poling_period, resolution)[0]
-            temp_scan_data.append(intensity)
+#         temp_scan_data = []
+#         for temp in temps_download:
+#             intensity = simulator.calculate_intensity([degenerate_wl], pump_wavelength, temp, crystal_length, poling_period, resolution)[0]
+#             temp_scan_data.append(intensity)
         
-        temp_df = pd.DataFrame({
-            'Temperature (°C)': temps_download,
-            'Degenerate Intensity': temp_scan_data
-        })
+#         temp_df = pd.DataFrame({
+#             'Temperature (°C)': temps_download,
+#             'Degenerate Intensity': temp_scan_data
+#         })
         
       
 
