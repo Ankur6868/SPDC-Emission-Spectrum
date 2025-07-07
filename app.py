@@ -224,13 +224,13 @@ st.sidebar.header("🎛️ Simulation Parameters")
 # Crystal parameters
 st.sidebar.subheader("Crystal Properties")
 pump_wavelength = st.sidebar.slider("Pump Wavelength (nm)", 350, 500, 405, 1)
-poling_period = st.sidebar.slider("Poling Period (μm)", 5.0, 20.0, 9.5, 0.1)
-crystal_length = st.sidebar.slider("Crystal Length (mm)", 1, 50, 20, 1)
+poling_period = st.sidebar.slider("Poling Period (μm)", 1.0, 20.0, 3.425, 0.1)
+crystal_length = st.sidebar.slider("Crystal Length (mm)", 1, 50, 30, 1)
 
 # Spectral range
 st.sidebar.subheader("Spectral Range")
-min_wavelength = st.sidebar.slider("Min Wavelength (nm)", 700, 800, 740, 5)
-max_wavelength = st.sidebar.slider("Max Wavelength (nm)", 850, 950, 900, 5)
+min_wavelength = st.sidebar.slider("Min Wavelength (nm)", 700, 800, 740, 1)
+max_wavelength = st.sidebar.slider("Max Wavelength (nm)", 850, 950, 900, 1)
 resolution = st.sidebar.slider("Spectral Resolution (nm)", 0.1, 2.0, 0.5, 0.1)
 
 # Temperature settings
@@ -239,8 +239,8 @@ temperature = st.sidebar.slider("Temperature (°C)", 20, 80, 35, 5)
 enable_temp_scan = st.sidebar.checkbox("Enable Temperature Scan", value=True)
 
 if enable_temp_scan:
-    temp_min = st.sidebar.slider("Scan Min Temp (°C)", 20, 50, 35, 5)
-    temp_max = st.sidebar.slider("Scan Max Temp (°C)", 50, 80, 60, 5)
+    temp_min = st.sidebar.slider("Scan Min Temp (°C)", 20, 40, 35, 5)
+    temp_max = st.sidebar.slider("Scan Max Temp (°C)", 35, 80, 60, 5)
 
 # Main content area
 col1, col2 = st.columns([2, 1])
@@ -410,7 +410,7 @@ with col7:
     st.write(f"**QPM Order:** 1st")
 
 # Download data
-st.header("💾 Export Data")
+#st.header("💾 Export Data")
 
 # Create dataframe
 df = pd.DataFrame({
@@ -445,13 +445,5 @@ with col9:
             'Degenerate Intensity': temp_scan_data
         })
         
-        st.download_button(
-            label="📥 Download Temperature Scan (CSV)",
-            data=temp_df.to_csv(index=False),
-            file_name=f"ppktp_temp_scan_{pump_wavelength}nm.csv",
-            mime="text/csv"
-        )
+      
 
-# Footer
-st.markdown("---")
-st.markdown("**Note:** This simulation uses simplified models for educational purposes. Real PPKTP behavior may vary due to additional factors not included in this model.")
